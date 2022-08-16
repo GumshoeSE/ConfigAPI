@@ -11,12 +11,14 @@ namespace ConfigAPI.Services
         private readonly string _clientAPIKey;
         private readonly string _adminAPIKey;
         private readonly string _serverSecret;
+        private readonly string _apiUrl;
 
         public AuthService(APIConfig config)
         {
             _clientAPIKey = config.ClientAPIKey;
             _adminAPIKey = config.AdminAPIKey;
             _serverSecret = config.ServerSecret;
+            _apiUrl = config.APIUrl;
         }
 
         public IResult Login(LoginModel user)
@@ -30,8 +32,8 @@ namespace ConfigAPI.Services
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var role = user.APIKey == _clientAPIKey ? "Client" : "Admin";
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:5001",
-                    audience: "https://localhost:5001",
+                    issuer: _apiUrl,
+                    audience: _apiUrl,
                     claims: new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.UserName),

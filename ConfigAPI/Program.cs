@@ -18,7 +18,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSingleton(apiConfig);
 
 builder.Services.AddCors();
-builder.Services.ConfigureAuthentication(apiConfig.ServerSecret);
+builder.Services.ConfigureAuthentication(apiConfig.ServerSecret, apiConfig.APIUrl);
 builder.Services.AddAuthorization();
 
 var app = builder.Build();

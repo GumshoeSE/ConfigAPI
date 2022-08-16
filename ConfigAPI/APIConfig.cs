@@ -5,5 +5,6 @@
         public string ClientAPIKey { get; set; } = string.Empty;
         public string AdminAPIKey { get; set; } = string.Empty;
         public string ServerSecret { get; set; } = string.Empty;
+        public string APIUrl { get; set; } = string.Empty;
     }
 }

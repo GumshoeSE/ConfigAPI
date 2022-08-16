@@ -6,7 +6,7 @@ namespace ConfigAPI.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void ConfigureAuthentication(this IServiceCollection services, string serverSecret)
+        public static void ConfigureAuthentication(this IServiceCollection services, string serverSecret, string apiUrl)
         {
             services.AddAuthentication(opt => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -20,8 +20,8 @@ namespace ConfigAPI.Extensions
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "https://localhost:5001",
-                    ValidAudience = "https://localhost:5001",
+                    ValidIssuer = apiUrl,
+                    ValidAudience = apiUrl,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(serverSecret))
                 };
             });
